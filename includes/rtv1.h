@@ -6,7 +6,7 @@
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:43:48 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/02 16:12:06 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/02 17:42:19 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ typedef struct				s_sphere
 
 typedef struct				s_rgb
 {
-	int						r;
-	int						g;
-	int						b;
+	unsigned int			r;
+	unsigned int			g;
+	unsigned int			b;
 }							t_rgb;
 
 typedef	struct				s_ray
@@ -141,7 +141,7 @@ int			ray_intersect(t_vect *orig, t_vect *dir,t_sphere *s);
 
 t_mlx		*mlxdel(t_mlx *mlx);
 
-void		ft_putimage(t_mlx *mlx, t_sphere *s);
+void		ft_putimage(t_mlx *mlx, t_ray ray);
 
 void		render(t_sphere *sphere, t_image *img);
 
@@ -159,33 +159,58 @@ void		ft_parse(t_mlx *mlx, char *str);
 
 int			get_next_line(const int fd, char **line);
 
-void	ambient_data(t_mlx *mlx, char **str);
+void		ambient_data(t_mlx *mlx, char **str);
 
-void	cam_data(t_mlx *mlx, char **str);
+void		cam_data(t_mlx *mlx, char **str);
 
-void	cone_data(t_mlx *mlx, char **str);
+void		cone_data(t_mlx *mlx, char **str);
 
-void	cylinder_data(t_mlx *mlx, char **str);
+void		cone(t_mlx *mlx, t_ray *ray, int i, t_object *obj);
 
-void	light_data(t_mlx *mlx, char **str);
+double		cone_intersect(t_vect o, t_vect dir, t_object *obj);
 
-void	plane_data(t_mlx *mlx, char **str);
+t_vect		cone_normal_calc(t_ray *ray, t_object *obj);
 
-void	sphere_data(t_mlx *mlx, char **str);
+void		cylinder_data(t_mlx *mlx, char **str);
 
+void		cylinder(t_mlx *mlx, t_ray *ray, int i, t_object *obj);
+
+double		cylinder_intersect(t_vect o, t_vect dir, t_object *obj);
+
+t_vect		cyl_normal_calc(t_ray *ray, t_object *obj);
+
+void		light_data(t_mlx *mlx, char **str);
+
+void		light(t_mlx *mlx, t_ray *ray);
+
+void		plane_data(t_mlx *mlx, char **str);
+
+void		plane(t_mlx *mlx, t_ray *ray, int i, t_object *obj);
+
+double		plane_intersect(t_vect o, t_vect dir, t_object *obj);
+
+void		sphere_data(t_mlx *mlx, char **str);
+
+void		sphere(t_mlx *mlx, t_ray *ray, int i, t_object *obj);
+
+t_vect		sphere_normal(t_ray *ray, t_object *obj);
+
+double		sphere_intersect(t_vect o, t_vect dir, t_object *obj);
+
+void		ray_trace_init(t_mlx *mlx, t_ray *ray);
+
+double		get_t(double a, double b, double d);
 
 
 //vectors operations
-t_vect		*new_vect2(double x, double y, double z);
-t_vect		*new_vect(t_vect *s, t_vect *e);
-t_vect		*vect_sum(t_vect *v1, t_vect *v2);
-double		vect_proizv(t_vect *v1, t_vect *v2);
-double		vect_len(t_vect *v1);
-t_vect		*vect_scale(t_vect *v1, double t);
-t_vect		*vect_norm(t_vect *v1);
-t_vect		*vect_sub(t_vect *v1, t_vect *v2);
-t_vect		*vect_rot(t_vect *d, t_vect *r);
-t_vect		*vect_rotx(t_vect *d, double a);
-t_vect		*vect_roty(t_vect *d, double a);
-t_vect		*vect_rotz(t_vect *d, double a);
+t_vect		vect_sum(t_vect v1, t_vect v2);
+double		vect_dot(t_vect v1, t_vect v2);
+double		vect_len(t_vect v1);
+t_vect		vect_scale(t_vect v1, double t);
+t_vect		vect_norm(t_vect v1);
+t_vect		vect_sub(t_vect v1, t_vect v2);
+t_vect		vect_rot(t_vect d, t_vect r);
+t_vect		vect_rotx(t_vect d, double a);
+t_vect		vect_roty(t_vect d, double a);
+t_vect		vect_rotz(t_vect d, double a);
 #endif

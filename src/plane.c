@@ -6,7 +6,7 @@
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:04:02 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/02 16:20:59 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/02 16:54:13 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,33 @@ void	plane_data(t_mlx *mlx, char **str)
 	while (++i <= 10)
 		free(str[i]);
 	free(str);
+}
+
+double	plane_intersect(t_vect o, t_vect dir, t_object *obj)
+{
+	double	t;
+	double	a;
+	double	b;
+	t_vect	x;
+
+	x = vect_sub(o, obj->pos);
+	a = vect_dot(x, obj->rot);
+	b = vect_dot(dir, obj->rot);
+	if (b == 0 || (a < 0 && b < 0) || (a > 0 && b > 0))
+		return (-1);
+	t = -a / b;
+	if (t > EPS)
+		return (t);
+	return (-1);
+}
+
+void	plane(t_mlx *mlx, t_ray *ray, int i, t_object *obj)
+{
+	obj->rot = vect_norm(obj->rot);
+	obj->t = plane_intersect(ray->orig, ray->dir, obj);
+	if (obj->t > 0 && obj->t < mlx->min_t)
+	{
+		mlx->min_t = obj->t;
+		mlx->clos_obj = i;
+	}
 }
