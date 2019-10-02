@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key.c                                              :+:      :+:    :+:   */
+/*   ambient.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/18 11:23:09 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/02 15:50:46 by mchett           ###   ########.fr       */
+/*   Created: 2019/10/02 16:05:12 by mchett            #+#    #+#             */
+/*   Updated: 2019/10/02 16:23:53 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/rtv1.h"
 
-int		key_hook(int keycode, t_mlx *m)
+void	ambient_data(t_mlx *mlx, char **str)
 {
-	if (keycode == 53)
-		exit(EXIT_SUCCESS);
-	if (keycode == 257)
-	{
-		(void)m;
-	}
-	return (0);
+	int i;
+
+		i = -1;
+		mlx->ambient = (double)(atoi(str[1])) / 100;
+		if (mlx->ambient < 0)
+			ft_error("Wrong intensity parameter");
+		while (++i <= 1)
+			free(str[i]);
+		free(str);
 }

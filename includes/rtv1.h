@@ -6,7 +6,7 @@
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:43:48 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/02 14:56:07 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/02 16:12:06 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,14 @@
 # include "../libs/libft/libft.h" 
 # include "../libs/minilibx/mlx.h"
 # include <math.h>
-#include <fcntl.h>
-#include <stdio.h>
-#include <pthread.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <pthread.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
 # define DTR(a)	((double)a * (M_PI / 180))
 # define W_W 800
 # define W_H 800
@@ -29,9 +34,12 @@
 # define CYLINDER 3
 # define CONE 4
 # define EPS 0.000001
-# define OBJ sdl->obj[sdl->clos_obj]
+# define OBJ mlx->obj[mlx->clos_obj]
 # define SPL spl_res[0]
-# define OBJP sdl->obj[sdl->obj_counter]
+# define OBJP mlx->obj[mlx->obj_counter]
+# define BUFF_SIZE 1000
+# define ENDL '\n'
+# define END '\0'
 
 typedef struct				s_image
 {
@@ -125,19 +133,11 @@ typedef struct				s_mlx
 
 }							t_mlx;
 
-
-
-//t_vect		*new_vect2(double x, double y, double z);
-
 t_sphere	*new_sphere(double r, t_vect *p);
 
 double		vect_proizv_v(t_vect *v, t_vect *b);
 
-//t_vect		*new_vect(t_vect *s, t_vect *e);
-
 int			ray_intersect(t_vect *orig, t_vect *dir,t_sphere *s);
-
-//t_vect		*vect_norm(t_vect *v);
 
 t_mlx		*mlxdel(t_mlx *mlx);
 
@@ -151,24 +151,27 @@ t_image		*new_image(t_mlx *mlx);
 
 t_mlx		*ft_init(char *str, void *ini);
 
-int		key_hook(int keycode, t_mlx *m);
+int			key_hook(int keycode, t_mlx *m);
 
-void	ft_error(char *str);
+void		ft_error(char *str);
 
-void	ft_parse(t_mlx *mlx, char *str);
+void		ft_parse(t_mlx *mlx, char *str);
 
+int			get_next_line(const int fd, char **line);
 
+void	ambient_data(t_mlx *mlx, char **str);
 
+void	cam_data(t_mlx *mlx, char **str);
 
+void	cone_data(t_mlx *mlx, char **str);
 
+void	cylinder_data(t_mlx *mlx, char **str);
 
+void	light_data(t_mlx *mlx, char **str);
 
+void	plane_data(t_mlx *mlx, char **str);
 
-
-
-
-
-
+void	sphere_data(t_mlx *mlx, char **str);
 
 
 

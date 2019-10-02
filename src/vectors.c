@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors->c                                          :+:      :+:    :+:   */
+/*   vectors.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchett <mchett@student->42->fr>              +#+  +:+       +#+        */
+/*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:02:31 by mchett            #+#    #+#             */
-/*   Updated: 2019/09/30 17:24:42 by mchett           ###   ########->fr       */
+/*   Updated: 2019/10/02 15:59:12 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ t_vect	*new_vect(t_vect *e, t_vect *s)
 	v = (t_vect*)ft_memalloc(sizeof(t_vect));
 	if (v == NULL)
 		return (v);
-	v->x = - s->x + e->x;
-	v->y = - s->y + e->y;
-	v->z = - s->z + e->z;
+	v->x = e->x - s->x;
+	v->y = e->y - s->y;
+	v->z = e->z - s->z;
 	return (v);
 }
 
@@ -64,12 +64,12 @@ t_vect	*vect_scale(t_vect *v, double b)
 
 double	vect_proizv(t_vect *v, t_vect *b)
 {
-	return (v->x * b->x + v->y * b->y +	v->z * b->z);
+	return (v->x * b->x + v->y * b->y + v->z * b->z);
 }
 
 double	vect_len(t_vect *v)
 {
-	return (sqrt(vect_proizv(v,v)));
+	return (sqrt(vect_proizv(v, v)));
 }
 
 t_vect	*vect_norm(t_vect *v)
@@ -95,7 +95,6 @@ t_vect	*vect_rotx(t_vect *d, double a)
 	r = (t_vect*)ft_memalloc(sizeof(t_vect));
 	if (r == NULL)
 		return (r);
-
 	r->x = d->x;
 	r->y = d->y * cos(a) - d->z * sin(a);
 	r->z = d->y * sin(a) + d->z * cos(a);
@@ -127,7 +126,3 @@ t_vect	*vect_rotz(t_vect *d, double a)
 	r->z = d->z;
 	return (r);
 }
-
-
-
-
