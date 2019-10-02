@@ -6,18 +6,32 @@
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:43:48 by mchett            #+#    #+#             */
-/*   Updated: 2019/09/30 17:28:58 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/02 14:56:07 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 # define RTV1_H
 
-# define W_W	1920
-# define W_H	1080
 # include "../libs/libft/libft.h" 
 # include "../libs/minilibx/mlx.h"
 # include <math.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <pthread.h>
+# define DTR(a)	((double)a * (M_PI / 180))
+# define W_W 800
+# define W_H 800
+# define V_W 40
+# define V_H 40
+# define SPHERE 1
+# define PLANE 2
+# define CYLINDER 3
+# define CONE 4
+# define EPS 0.000001
+# define OBJ sdl->obj[sdl->clos_obj]
+# define SPL spl_res[0]
+# define OBJP sdl->obj[sdl->obj_counter]
 
 typedef struct				s_image
 {
@@ -45,45 +59,85 @@ typedef struct				s_vect
 	double					z;
 }							t_vect;
 
+typedef	struct				s_cam
+{
+	t_vect					pos;
+	t_vect					rot;
+}							t_cam;
+
+typedef	struct				s_light
+{
+	t_vect					pos;
+	t_vect					p;
+	t_vect					n;
+	double					inten;
+	double					new_inten;
+}							t_light;
+
 typedef struct				s_sphere
 {
 	t_vect					*centr;
 	double					r;
 }							t_sphere;
 
-typedef struct				s_cone
+typedef struct				s_rgb
 {
-}							t_cone;
+	int						r;
+	int						g;
+	int						b;
+}							t_rgb;
 
-typedef struct				s_plane
+typedef	struct				s_ray
 {
-}							t_plane;
+	t_vect					orig;
+	t_vect					dir;
+}							t_ray;
 
-typedef struct				s_cylinder
+typedef struct				s_object
 {
-}							t_cylinder;
+	t_vect					pos;
+	int						col1;
+	t_rgb					col2;
+	t_vect					rot;
+	double					r;
+	double					t;
+	int						name;
+	double					specular;
+}							t_object;
 
 typedef struct				s_mlx
 {
-
-
 	void					*mlx_ptr;
 	void					*win_ptr;
 	t_image					*image;
 	t_mouse					*mouse;
+	t_cam					cam;
+	t_object				*obj;
+	int						obj_num;
+	int						light_num;
+	int						clos_obj;
+	int						obj_counter;
+	int						light_counter;
+	int						cam_is;
+	double					min_t;
+	double					ambient;
+	t_light					*light;
+
 }							t_mlx;
 
-t_vect		*new_vect2(double x, double y, double z);
+
+
+//t_vect		*new_vect2(double x, double y, double z);
 
 t_sphere	*new_sphere(double r, t_vect *p);
 
 double		vect_proizv_v(t_vect *v, t_vect *b);
 
-t_vect		*new_vect(t_vect *s, t_vect *e);
+//t_vect		*new_vect(t_vect *s, t_vect *e);
 
 int			ray_intersect(t_vect *orig, t_vect *dir,t_sphere *s);
 
-t_vect		*vect_norm(t_vect *v);
+//t_vect		*vect_norm(t_vect *v);
 
 t_mlx		*mlxdel(t_mlx *mlx);
 
@@ -97,4 +151,38 @@ t_image		*new_image(t_mlx *mlx);
 
 t_mlx		*ft_init(char *str, void *ini);
 
+int		key_hook(int keycode, t_mlx *m);
+
+void	ft_error(char *str);
+
+void	ft_parse(t_mlx *mlx, char *str);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//vectors operations
+t_vect		*new_vect2(double x, double y, double z);
+t_vect		*new_vect(t_vect *s, t_vect *e);
+t_vect		*vect_sum(t_vect *v1, t_vect *v2);
+double		vect_proizv(t_vect *v1, t_vect *v2);
+double		vect_len(t_vect *v1);
+t_vect		*vect_scale(t_vect *v1, double t);
+t_vect		*vect_norm(t_vect *v1);
+t_vect		*vect_sub(t_vect *v1, t_vect *v2);
+t_vect		*vect_rot(t_vect *d, t_vect *r);
+t_vect		*vect_rotx(t_vect *d, double a);
+t_vect		*vect_roty(t_vect *d, double a);
+t_vect		*vect_rotz(t_vect *d, double a);
 #endif
