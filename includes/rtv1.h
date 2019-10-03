@@ -6,7 +6,7 @@
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:43:48 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/03 12:38:14 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/03 14:59:45 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct				s_mlx
 	int						cam_is;
 	double					min_t;
 	double					ambient;
+	t_ray					ray;
 	t_light					*light;
 
 }							t_mlx;
@@ -131,7 +132,7 @@ double		vect_proizv_v(t_vect *v, t_vect *b);
 
 t_mlx		*mlxdel(t_mlx *mlx);
 
-void		ft_putimage(t_mlx *mlx, t_ray ray);
+void		ft_putimage(t_mlx *mlx);
 
 void		image_set_pixel(t_image *image, int x, int y, int color);
 
