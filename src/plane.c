@@ -6,7 +6,7 @@
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:04:02 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/02 16:54:13 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/03 12:19:34 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,21 @@ void	plane_data(t_mlx *mlx, char **str)
 	int i;
 
 	i = -1;
-	OBJP.pos.x = (double)(atoi(str[1]));
-	OBJP.pos.y = (double)(atoi(str[2]));
-	OBJP.pos.z = (double)(atoi(str[3]));
-	OBJP.rot.x = (double)(atoi(str[4]));
-	OBJP.rot.y = (double)(atoi(str[5]));
-	OBJP.rot.z = (double)(atoi(str[6]));
-	if (atoi(str[7]) < 0 || atoi(str[8]) < 0 || atoi(str[9]) < 0)
+	OBJP.pos.x = (double)(ft_atoi(str[1]));
+	OBJP.pos.y = (double)(ft_atoi(str[2]));
+	OBJP.pos.z = (double)(ft_atoi(str[3]));
+	OBJP.rot.x = (double)(ft_atoi(str[4]));
+	OBJP.rot.y = (double)(ft_atoi(str[5]));
+	OBJP.rot.z = (double)(ft_atoi(str[6]));
+	if (ft_atoi(str[7]) < 0 || ft_atoi(str[8]) < 0 || ft_atoi(str[9]) < 0)
 		ft_error("Wrong input");
-	OBJP.col2.r = atoi(str[7]);
-	OBJP.col2.g = atoi(str[8]);
-	OBJP.col2.b = atoi(str[9]);
-	OBJP.specular = (double)(atoi(str[10]));
+	OBJP.col2.r = ft_atoi(str[7]);
+	OBJP.col2.g = ft_atoi(str[8]);
+	OBJP.col2.b = ft_atoi(str[9]);
+	OBJP.specular = (double)(ft_atoi(str[10]));
 	OBJP.name = PLANE;
-	//mlx->obj_counter++;
+	//printf("PLANE x = %f, y = %f, z = %f, rotx = %f, roty = %f, rotz = %f, r = %d, g = %d, b = %d, specular = %f\n", OBJP.pos.x,OBJP.pos.y,OBJP.pos.z, OBJP.rot.x, OBJP.rot.y, OBJP.rot.z, OBJP.col2.r,OBJP.col2.g,OBJP.col2.b,OBJP.specular);
+	mlx->obj_counter++;
 	while (++i <= 10)
 		free(str[i]);
 	free(str);

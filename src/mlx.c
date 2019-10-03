@@ -6,7 +6,7 @@
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 14:15:43 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/02 15:36:02 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/03 12:36:32 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@ t_mlx		*ft_init(char *str, void *ini)
 	mlx->light_num = 0;
 	mlx->obj_counter = 0;
 	mlx->light_counter = 0;
-	mlx->obj = ft_memalloc(sizeof(t_object) * mlx->obj_num);
-	mlx->light = ft_memalloc(sizeof(t_light) * mlx->light_num);
-	if (mlx->obj == NULL || mlx->light == NULL)
-		ft_error("Error malloc in ft_init()");
 	mlx->mouse->x = 0;
 	mlx->mouse->y = 0;
 	mlx->mouse->right = 0;

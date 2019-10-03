@@ -6,7 +6,7 @@
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:43:48 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/02 17:42:19 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/03 12:38:14 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,6 @@ typedef	struct				s_light
 	double					new_inten;
 }							t_light;
 
-typedef struct				s_sphere
-{
-	t_vect					*centr;
-	double					r;
-}							t_sphere;
-
 typedef struct				s_rgb
 {
 	unsigned int			r;
@@ -133,17 +127,11 @@ typedef struct				s_mlx
 
 }							t_mlx;
 
-t_sphere	*new_sphere(double r, t_vect *p);
-
 double		vect_proizv_v(t_vect *v, t_vect *b);
-
-int			ray_intersect(t_vect *orig, t_vect *dir,t_sphere *s);
 
 t_mlx		*mlxdel(t_mlx *mlx);
 
 void		ft_putimage(t_mlx *mlx, t_ray ray);
-
-void		render(t_sphere *sphere, t_image *img);
 
 void		image_set_pixel(t_image *image, int x, int y, int color);
 

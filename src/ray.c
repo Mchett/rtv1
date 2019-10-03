@@ -6,7 +6,7 @@
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 16:32:52 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/02 17:35:25 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/03 12:11:28 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int color(t_rgb rgb)
 {
-	printf("r = %d, g = %d, b = %d\n",rgb.r,rgb.g ,rgb.b);
-	printf("%d\n",rgb.r << 16| rgb.g << 8 | rgb.b);
+	//printf("r = %d, g = %d, b = %d\n",rgb.r,rgb.g ,rgb.b);
+	//printf("%d\n",rgb.r << 16| rgb.g << 8 | rgb.b);
 	return ((rgb.r << 16| rgb.g << 8 | rgb.b));;
 }
 
@@ -39,7 +39,7 @@ void	set_color(t_mlx *mlx, int i, int x, int y)
 	{
 		int k = color(mlx->obj[i].col2);
 		if(k != 0)
-			printf("%d\n",k);
+			//printf("%d\n",k);
 		image_set_pixel(mlx->image, x, y, k);
 	}
 	else
