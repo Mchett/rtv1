@@ -6,7 +6,7 @@
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:43:48 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/03 14:59:45 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/03 15:31:28 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,10 @@ double		sphere_intersect(t_vect o, t_vect dir, t_object *obj);
 void		ray_trace_init(t_mlx *mlx, t_ray *ray);
 
 double		get_t(double a, double b, double d);
+
+void		val_1(char **str, int k);
+
+int			line_valid(char *line);
 
 
 //vectors operations

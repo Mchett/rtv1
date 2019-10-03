@@ -6,46 +6,11 @@
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:03:20 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/03 12:19:30 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/03 15:26:40 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/rtv1.h"
-/*
-t_sphere *new_sphere(double r, t_vect *p)
-{
-	t_sphere	*s;
-
-	s = (t_sphere*)ft_memalloc(sizeof(t_sphere));
-	if (s == NULL)
-		return (s);
-	s->centr = p;
-	s->r = r;
-	return (s); 
-}
-
-int ray_intersect(t_vect *orig, t_vect *dir,t_sphere *s)
-{
-	double	tca;
-	double	d2;
-	double	t0;
-	double	t1;
-	t_vect *L = new_vect(s->centr, orig);
-
-	tca = vect_proizv(L, dir);
-	d2 = vect_proizv(L, L) - tca * tca;
-	if (d2 > s->r * s->r) 
-	{
-		return (0);
-	}
-	t0 = tca - sqrt(s->r * s->r - d2);
-	t1 = tca + sqrt(s->r * s->r - d2);
-	if (t0 < 0 && t1 < 0 )
-	{
-		return (0);
-	}
-	return (1);
-}*/
 
 double	get_t(double a, double b, double d)
 {
@@ -106,7 +71,6 @@ void	sphere_data(t_mlx *mlx, char **str)
 	OBJP.col2.b = ft_atoi(str[7]);
 	OBJP.specular = (double)(ft_atoi(str[8]));
 	OBJP.name = SPHERE;
-	//printf("SPHERE x = %f, y = %f, z = %f, rad = %f, r = %d, g = %d, b = %d, specular = %f\n", OBJP.pos.x,OBJP.pos.y,OBJP.pos.z,OBJP.r, OBJP.col2.r,OBJP.col2.g,OBJP.col2.b,OBJP.specular);
 	mlx->obj_counter++;
 	while (++i <= 8)
 		free(str[i]);

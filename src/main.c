@@ -6,7 +6,7 @@
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 12:30:30 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/03 15:00:39 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/03 15:22:31 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int		main(int argc, char **argv)
 	mlx->ray.orig.x = mlx->cam.pos.x;
 	mlx->ray.orig.y = mlx->cam.pos.y;
 	mlx->ray.orig.z = mlx->cam.pos.z;
-	
 	draw(mlx);
 	mlx_loop(init);
 	free(mlx);

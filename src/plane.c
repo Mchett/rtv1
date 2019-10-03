@@ -6,7 +6,7 @@
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:04:02 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/03 12:19:34 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/03 15:26:01 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	plane_data(t_mlx *mlx, char **str)
 	OBJP.col2.b = ft_atoi(str[9]);
 	OBJP.specular = (double)(ft_atoi(str[10]));
 	OBJP.name = PLANE;
-	//printf("PLANE x = %f, y = %f, z = %f, rotx = %f, roty = %f, rotz = %f, r = %d, g = %d, b = %d, specular = %f\n", OBJP.pos.x,OBJP.pos.y,OBJP.pos.z, OBJP.rot.x, OBJP.rot.y, OBJP.rot.z, OBJP.col2.r,OBJP.col2.g,OBJP.col2.b,OBJP.specular);
 	mlx->obj_counter++;
 	while (++i <= 10)
 		free(str[i]);

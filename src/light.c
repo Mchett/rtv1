@@ -6,7 +6,7 @@
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 16:04:58 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/03 12:25:45 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/03 15:21:34 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	light_data(t_mlx *mlx, char **str)
 	mlx->light[mlx->light_counter].inten = (double)(ft_atoi(str[4])) / 100;
 	if (mlx->light[mlx->light_counter].inten < 0)
 		ft_error("Wrong intensity parameter");
-	
-	printf("LIGHT x = %f, y = %f, z = %f, inten = %f\n", mlx->light[mlx->light_counter].pos.x,mlx->light[mlx->light_counter].pos.y,mlx->light[mlx->light_counter].pos.z, mlx->light[mlx->light_counter].inten);
 	mlx->light_counter++;
 	while (++i <= 4)
 		free(str[i]);

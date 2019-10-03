@@ -6,7 +6,7 @@
 #    By: mchett <mchett@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/27 16:02:40 by mchett            #+#    #+#              #
-#    Updated: 2019/10/02 17:25:32 by mchett           ###   ########.fr        #
+#    Updated: 2019/10/03 15:28:43 by mchett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME = rtv1
 FLAGS = -Wall -Wextra -Werror -I includes/ -g
 LIBFLAGS = -L./libs/libft -lft -L./libs/minilibx -lmlx -framework OpenGL -framework AppKit
-FILES = ambient.c cam.c cone.c cylinder.c get_next_line.c image.c key.c light.c main.c mlx.c parser.c plane.c ray.c sphere.c vectors.c 
+FILES = ambient.c cam.c cone.c cylinder.c get_next_line.c image.c key.c light.c main.c mlx.c parser.c parser2.c plane.c ray.c sphere.c vectors.c vectors2.c 
 INCFILES = includes/rtv1.h
 SRCS = $(addprefix src/, $(FILES))
 OBJ = $(addprefix objectives/, $(FILES:.c=.o))

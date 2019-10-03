@@ -6,7 +6,7 @@
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:03:49 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/03 12:19:45 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/03 15:19:30 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	cone_data(t_mlx *mlx, char **str)
 	OBJP.col2.b = ft_atoi(str[10]);
 	OBJP.specular = (double)(ft_atoi(str[11]));
 	OBJP.name = CONE;
-	//printf("CONE x = %f, y = %f, z = %f, rad = %f, rotx = %f, roty = %f, rotz = %f, r = %d, g = %d, b = %d, specular = %f\n", OBJP.pos.x,OBJP.pos.y,OBJP.pos.z,OBJP.r, OBJP.rot.x, OBJP.rot.y, OBJP.rot.z, OBJP.col2.r,OBJP.col2.g,OBJP.col2.b,OBJP.specular);
-	mlx->obj_counter++;
 	while (++i <= 11)
 		free(str[i]);
 	free(str);
