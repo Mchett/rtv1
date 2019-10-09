@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cmanfred <cmanfred@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 11:51:12 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/03 15:00:53 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/04 16:25:42 by cmanfred         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		ft_putimage(t_mlx *mlx)
 {
 	ft_bzero(mlx->image->data, W_W * W_H * mlx->image->bitspp);
-	ray_trace_init(mlx, &mlx->ray);
+	ray_trace_init(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->image->ptr, 0, 0);
 }
 

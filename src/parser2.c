@@ -5,12 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/03 15:28:53 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/03 15:29:58 by mchett           ###   ########.fr       */
+/*   Created: 2019/10/04 12:19:56 by mchett            #+#    #+#             */
+/*   Updated: 2019/10/07 13:53:12 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/rtv1.h"
+
+void	free_mass(char **mass)
+{
+	int i;
+
+	i = 0;
+	while (mass[i])
+	{
+		free(mass[i]);
+		i++;
+	}
+	free(mass);
+}
 
 int		line_valid(char *line)
 {
@@ -50,14 +63,29 @@ int		val_2(char *str)
 	return (1);
 }
 
-void	val_1(char **str, int k)
+void	val_1(char **str, size_t k)
 {
-	int i;
+	size_t i;
+
+	if (k != ft_check_len(str))
+		ft_error("not valid input");
+	i = 1;
+	while (i < k)
+	{
+		if (!str[i] || (ft_atoi(str[i]) == 0 && str[i][0] != '0') ||
+		!val_2(str[i]))
+			ft_error("Wrong input file");
+		i++;
+	}
+}
+
+size_t	ft_check_len(char **str)
+{
+	size_t i;
 
 	i = 0;
-	while (++i <= k)
-		if (!str[i] || (ft_atoi(str[i]) == 0 && str[i][0] != '0') ||
-				str[k + 1] != NULL || !val_2(str[i]))
-			ft_error("Wrong input file");
-	i = -1;
+	if (str)
+		while (str[i])
+			i++;
+	return (i);
 }

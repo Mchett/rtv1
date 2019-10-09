@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cmanfred <cmanfred@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 16:04:58 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/03 15:21:34 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/05 14:32:25 by cmanfred         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	light_data(t_mlx *mlx, char **str)
 	int i;
 
 	i = -1;
+	if (ft_check_len(str) != 5)
+		ft_error("Wrong input");
 	mlx->light[mlx->light_counter].pos.x = (double)(ft_atoi(str[1]));
 	mlx->light[mlx->light_counter].pos.y = (double)(ft_atoi(str[2]));
 	mlx->light[mlx->light_counter].pos.z = (double)(ft_atoi(str[3]));
@@ -24,9 +26,6 @@ void	light_data(t_mlx *mlx, char **str)
 	if (mlx->light[mlx->light_counter].inten < 0)
 		ft_error("Wrong intensity parameter");
 	mlx->light_counter++;
-	while (++i <= 4)
-		free(str[i]);
-	free(str);
 }
 
 int		shadow_init(t_light *light, t_mlx *mlx)

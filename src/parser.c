@@ -3,36 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cmanfred <cmanfred@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 14:53:31 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/03 15:29:23 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/07 13:04:18 by mchett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/rtv1.h"
 
-void	validation(char **str)
+void		validation(char **str)
 {
-	int i;
-
-	i = 0;
 	if (ft_strcmp(str[0], "cam:") == 0)
-		val_1(str, 6);
+		val_1(str, 7);
 	else if (ft_strcmp(str[0], "sphere:") == 0)
-		val_1(str, 8);
+		val_1(str, 9);
 	else if (ft_strcmp(str[0], "plane:") == 0)
-		val_1(str, 10);
-	else if (ft_strcmp(str[0], "cylinder:") == 0 ||
-	ft_strcmp(str[0], "cone:") == 0)
 		val_1(str, 11);
+	else if (ft_strcmp(str[0], "cylinder:") == 0 ||
+			ft_strcmp(str[0], "cone:") == 0)
+		val_1(str, 12);
 	else if (ft_strcmp(str[0], "light:") == 0)
-		val_1(str, 4);
+		val_1(str, 5);
 	else if (ft_strcmp(str[0], "ambient:") == 0)
-		val_1(str, 1);
+		val_1(str, 2);
 }
 
-void	obj_counter(t_mlx *mlx, char *str, int fd, char *line)
+static void	ft_check(char **res, char **line, t_mlx *mlx)
+{
+	if (ft_strcmp(res[0], "sphere:") == 0 ||
+			ft_strcmp(res[0], "plane:") == 0 ||
+			ft_strcmp(res[0], "cylinder:") == 0 ||
+			ft_strcmp(res[0], "cone:") == 0)
+		mlx->obj_num++;
+	else if (ft_strcmp(res[0], "light:") == 0)
+		mlx->light_num++;
+	else if (ft_strcmp(res[0], "cam:") == 0)
+		mlx->cam_is++;
+	free_mass(res);
+	ft_strdel(line);
+}
+
+void		obj_counter(t_mlx *mlx, char *str, int fd, char *line)
 {
 	char	**res;
 
@@ -41,15 +53,10 @@ void	obj_counter(t_mlx *mlx, char *str, int fd, char *line)
 	while (get_next_line(fd, &line) > 0)
 	{
 		res = ft_strsplit(line, ' ');
-		if (ft_strcmp(res[0], "sphere:") == 0 ||
-		ft_strcmp(res[0], "plane:") == 0 || ft_strcmp(res[0], "cylinder:") == 0
-		|| ft_strcmp(res[0], "cone:") == 0)
-			mlx->obj_num++;
-		else if (ft_strcmp(res[0], "light:") == 0)
-			mlx->light_num++;
-		else if (ft_strcmp(res[0], "cam:") == 0)
-			mlx->cam_is++;
-		ft_strdel(&line);
+		if (!res || !res[0])
+			ft_error("Empty string in the file");
+		else
+			ft_check(res, &line, mlx);
 	}
 	ft_strdel(&line);
 	if (mlx->cam_is != 1 || mlx->light_num == 0 || mlx->obj_num < 1)
@@ -59,7 +66,7 @@ void	obj_counter(t_mlx *mlx, char *str, int fd, char *line)
 	close(fd);
 }
 
-void	split_parse(char **str, t_mlx *mlx)
+void		split_parse(char **str, t_mlx *mlx)
 {
 	if (ft_strcmp(str[0], "cam:") == 0)
 		cam_data(mlx, str);
@@ -77,7 +84,7 @@ void	split_parse(char **str, t_mlx *mlx)
 		ambient_data(mlx, str);
 }
 
-void	ft_parse(t_mlx *mlx, char *str)
+void		ft_parse(t_mlx *mlx, char *str)
 {
 	char	*line;
 	int		fd;
@@ -94,6 +101,7 @@ void	ft_parse(t_mlx *mlx, char *str)
 		validation(spl_res);
 		split_parse(spl_res, mlx);
 		ft_strdel(&line);
+		free_mass(spl_res);
 	}
 	ft_strdel(&line);
 	close(fd);

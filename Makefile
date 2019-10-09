@@ -6,23 +6,26 @@
 #    By: mchett <mchett@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/27 16:02:40 by mchett            #+#    #+#              #
-#    Updated: 2019/10/03 15:28:43 by mchett           ###   ########.fr        #
+#    Updated: 2019/10/07 14:49:11 by mchett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = rtv1
-FLAGS = -Wall -Wextra -Werror -I includes/ -g
+NAME = RTv1
+FLAGS = -Wall -Wextra -Werror -I includes/ -g #-fsanitize=address
 LIBFLAGS = -L./libs/libft -lft -L./libs/minilibx -lmlx -framework OpenGL -framework AppKit
-FILES = ambient.c cam.c cone.c cylinder.c get_next_line.c image.c key.c light.c main.c mlx.c parser.c parser2.c plane.c ray.c sphere.c vectors.c vectors2.c 
+FILES = ambient.c cam.c cone.c cylinder.c get_next_line.c image.c key.c light.c main.c mlx.c parser.c parser2.c plane.c ray.c sphere.c vectors.c vectors2.c
 INCFILES = includes/rtv1.h
 SRCS = $(addprefix src/, $(FILES))
 OBJ = $(addprefix objectives/, $(FILES:.c=.o))
 
 
-all: $(NAME)
+all: lib
+	make startuem -j
 
-$(NAME):$(OBJ) $(INCFILES) | lib
+startuem: $(NAME)
+
+$(NAME):$(OBJ) $(INCFILES)
 	gcc $(FLAGS) $(LIBFLAGS) -o $(NAME) $(OBJ)
 
 objectives/%.o: src/%.c | objectives
@@ -31,8 +34,8 @@ objectives/%.o: src/%.c | objectives
 re: fclean all
 
 lib:
-	make -C ./libs/libft
-	make -C ./libs/minilibx
+	make -C ./libs/libft -j
+	make -C ./libs/minilibx -j
 
 clean:
 	rm -rf objectives/

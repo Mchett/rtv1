@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cmanfred <cmanfred@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:03:20 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/03 15:26:40 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/05 14:31:56 by cmanfred         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	sphere_data(t_mlx *mlx, char **str)
 {
 	int i;
 
+	if (ft_check_len(str) != 9)
+		ft_error("Wrong input");
 	i = -1;
 	OBJP.pos.x = (double)(ft_atoi(str[1]));
 	OBJP.pos.y = (double)(ft_atoi(str[2]));
@@ -66,15 +68,12 @@ void	sphere_data(t_mlx *mlx, char **str)
 	if (OBJP.r < 0.1 || ft_atoi(str[5]) < 0 || ft_atoi(str[6]) < 0
 		|| ft_atoi(str[7]) < 0)
 		ft_error("Wrong input for sphere");
-	OBJP.col2.r = ft_atoi(str[5]);
-	OBJP.col2.g = ft_atoi(str[6]);
-	OBJP.col2.b = ft_atoi(str[7]);
+	OBJP.col.r = ft_atoi(str[5]);
+	OBJP.col.g = ft_atoi(str[6]);
+	OBJP.col.b = ft_atoi(str[7]);
 	OBJP.specular = (double)(ft_atoi(str[8]));
 	OBJP.name = SPHERE;
 	mlx->obj_counter++;
-	while (++i <= 8)
-		free(str[i]);
-	free(str);
 }
 
 t_vect	sphere_normal(t_ray *ray, t_object *obj)

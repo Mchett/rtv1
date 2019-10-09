@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cmanfred <cmanfred@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:04:02 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/03 15:26:01 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/05 14:32:04 by cmanfred         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	plane_data(t_mlx *mlx, char **str)
 	int i;
 
 	i = -1;
+	if (ft_check_len(str) != 11)
+		ft_error("Wrong input");
 	OBJP.pos.x = (double)(ft_atoi(str[1]));
 	OBJP.pos.y = (double)(ft_atoi(str[2]));
 	OBJP.pos.z = (double)(ft_atoi(str[3]));
@@ -25,15 +27,12 @@ void	plane_data(t_mlx *mlx, char **str)
 	OBJP.rot.z = (double)(ft_atoi(str[6]));
 	if (ft_atoi(str[7]) < 0 || ft_atoi(str[8]) < 0 || ft_atoi(str[9]) < 0)
 		ft_error("Wrong input");
-	OBJP.col2.r = ft_atoi(str[7]);
-	OBJP.col2.g = ft_atoi(str[8]);
-	OBJP.col2.b = ft_atoi(str[9]);
+	OBJP.col.r = ft_atoi(str[7]);
+	OBJP.col.g = ft_atoi(str[8]);
+	OBJP.col.b = ft_atoi(str[9]);
 	OBJP.specular = (double)(ft_atoi(str[10]));
 	OBJP.name = PLANE;
 	mlx->obj_counter++;
-	while (++i <= 10)
-		free(str[i]);
-	free(str);
 }
 
 double	plane_intersect(t_vect o, t_vect dir, t_object *obj)

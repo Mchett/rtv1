@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchett <mchett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cmanfred <cmanfred@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:03:41 by mchett            #+#    #+#             */
-/*   Updated: 2019/10/03 15:20:34 by mchett           ###   ########.fr       */
+/*   Updated: 2019/10/05 14:32:11 by cmanfred         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	cylinder_data(t_mlx *mlx, char **str)
 	int i;
 
 	i = -1;
+	if (ft_check_len(str) != 12)
+		ft_error("Wrong input");
 	OBJP.pos.x = (double)(ft_atoi(str[1]));
 	OBJP.pos.y = (double)(ft_atoi(str[2]));
 	OBJP.pos.z = (double)(ft_atoi(str[3]));
@@ -27,15 +29,12 @@ void	cylinder_data(t_mlx *mlx, char **str)
 	if (OBJP.r < 0.1 || ft_atoi(str[8]) < 0 || ft_atoi(str[9]) < 0
 		|| ft_atoi(str[10]) < 0)
 		ft_error("Wrong input for cylinder");
-	OBJP.col2.r = ft_atoi(str[8]);
-	OBJP.col2.g = ft_atoi(str[9]);
-	OBJP.col2.b = ft_atoi(str[10]);
+	OBJP.col.r = ft_atoi(str[8]);
+	OBJP.col.g = ft_atoi(str[9]);
+	OBJP.col.b = ft_atoi(str[10]);
 	OBJP.specular = (double)(ft_atoi(str[11]));
 	OBJP.name = CYLINDER;
 	mlx->obj_counter++;
-	while (++i <= 11)
-		free(str[i]);
-	free(str);
 }
 
 double	cylinder_intersect(t_vect o, t_vect dir, t_object *obj)
